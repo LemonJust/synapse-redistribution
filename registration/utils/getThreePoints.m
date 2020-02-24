@@ -4,7 +4,7 @@ function points = getThreePoints(fishID,jPath,make4D)
 % Input example: fishID = 'ImgZfDsy20190118B7';
 
 if (isempty(jPath))
-    jPath = 'D:\Code\TR01\Data\ImagesInfo.json';
+    jPath = 'data\ImagesInfo.json';
 end
 fishInfo = jsondecode(fileread(jPath));
 %% get info for the fish 
