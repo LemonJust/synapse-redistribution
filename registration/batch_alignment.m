@@ -1,3 +1,5 @@
+% This code produces the final alignment for the 1DCP cohort 
+
 %% Make sure you have all the transforms
 clear all
 addpath('D:\Code\TR01\Utils');
