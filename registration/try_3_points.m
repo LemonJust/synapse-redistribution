@@ -3,7 +3,7 @@
 % ThreePoints: resulting transformation (for row - vectors)
 addpath('utils');
 
-fishID = 'ImgZfZdu20180123A3'; 
+fishID = 'ImgZfDsy20190201B3'; 
 
 plotting = true;
 ThreePoints = register3Points(fishID,[],plotting);
