@@ -99,9 +99,9 @@ if Plotting == 1
     xlim([0 2048*tem_resolution(1)])
     ylim([0 700*tem_resolution(2)]) % 1000->> 2048
     zlim([0 510*tem_resolution(3)])
-    xlabel('X')
-    ylabel('Y')
-    zlabel('Z')
+    xlabel('X, um')
+    ylabel('Y, um')
+    zlabel('Z, um')
     hold on
     %m = plot(Plane_f,'Color',[0 0.7 0.3]);
     m = plot(sf_f);
@@ -124,6 +124,8 @@ if Plotting == 1
     p3 = plot3(points_t(:,1),points_t(:,2),points_t(:,3),'.',...
         'Color',[1 0 0],'MarkerSize',40);
     hold off
+    
+    legend('Template','Moving','Transformed')
     
 end
 end

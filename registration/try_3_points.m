@@ -4,4 +4,6 @@
 addpath('utils');
 
 fishID = 'ImgZfZdu20180123A3'; 
-ThreePoints = register3Points(fishID,[]);
+
+plotting = true;
+ThreePoints = register3Points(fishID,[],plotting);
