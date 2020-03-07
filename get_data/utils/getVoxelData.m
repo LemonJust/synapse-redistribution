@@ -22,10 +22,7 @@ function [lost,gained,unchangedBefore,unchangedAfter,allBefore,...
         gained.voxel_synapNumber{iStudy} = zeros(voxelRange);
         gained.voxel_intensitySum{iStudy} = zeros(voxelRange);
         for iSynapse = 1:length(gained.xyz{iStudy}) 
-            % Here is where the error is happening
-%             iStudy
-%             iSynapse
-            gained.xyz{iStudy}(iSynapse,:)
+
             iVoxel = floor(gained.xyz{iStudy}(iSynapse,:)/xyzMicronStep) + 1;
             
             
