@@ -1,11 +1,13 @@
 function [lost,gained,unchangedBefore,unchangedAfter,allBefore,allAfter] = ...
-    getxyzAnat(lost,gained,unchangedBefore,unchangedAfter,allBefore,allAfter)
+    getxyzAnat(lost,gained,unchangedBefore,unchangedAfter,allBefore,allAfter,...
+    template_midplane_points,yzplane_points,template_resolution,yzplane_resolution)
 
 %TFile = 'D:\TR01\RealData_All\Template\TEMPLATE_ImgZfDsy20180223B3_1_MMStack_Pos0_bin221.tif';
-TMidplaneFile = 'D:\TR01\RealData_All\Template\Midline_dot_pairs_bin221.csv';
-YZPath = 'D:\TR01\RealData_All\Template\planeYZ.csv';
-Tresolution = [0.52 0.52 0.4];
-MidplaneAlignment = midplane_registrationV2(TMidplaneFile,Tresolution,[],YZPath,Tresolution,0)
+% template_midplane_points = 'D:\TR01\RealData_All\Template\Midline_dot_pairs_bin221.csv';
+% yzplane_points = 'D:\TR01\RealData_All\Template\planeYZ.csv';
+% template_resolution = [0.52 0.52 0.4];
+
+MidplaneAlignment = midplane_registrationV2(template_midplane_points,template_resolution,[],yzplane_points,yzplane_resolution,0)
 %%
 nStudies = length(allBefore.xyz);
 for iStudy = 1:nStudies
