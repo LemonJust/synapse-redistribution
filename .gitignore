@@ -2,3 +2,9 @@
 get_data/data/ImgZfDsy20180223D3_bin221.tif
 
 *.asv
+
+get_data/cohort_data.mat
+
+data_analysis/plane_statistics/*.xlsx
+
+data_analysis/db_plane/db_planes.mat
