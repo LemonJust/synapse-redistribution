@@ -15,9 +15,7 @@ function MidplaneAlignment = midplane_registrationV2(MidplanePoints,...
 % affine transformation matrix MidplaneAlignment for row vector [x y z 1]:
 % (Fixed_vector = Moving_vector*MidplaneAlignment)
 
-
-
-%if(InputType == 'fileID')
+% fit plane to moving points
 t = readtable(MidplanePoints);
 points_m = [t.X,t.Y,t.Slice].*bra_resolution;
 
@@ -27,27 +25,24 @@ if ~isempty(priorTransform)
 end
 
 sf_m = fit([points_m(:,1),points_m(:,2)],points_m(:,3),'poly11');
-%Plane_m = planeModel([sf_m.p10,sf_m.p01,-1,sf_m.p00]);
 Plane_m.Normal = [sf_m.p10,sf_m.p01,-1];
-% end
-% if(InputType == 'points')
-% points_m = MidplanePoints;
-% sf_m = fit([points_m(:,1),points_m(:,2)],points_m(:,3),'poly11');
-% %Plane_m = planeModel([sf_m.p10,sf_m.p01,-1,sf_m.p00]);
-% Plane_m.Normal = [sf_m.p10,sf_m.p01,-1];
-% end
 
+% asign plane to fixed (template) points
 t = readtable(TPath);
 points_f = [t.X,t.Y,t.Z].*tem_resolution;
-sf_f = fit([points_f(:,1),points_f(:,2)],points_f(:,3),'poly11');
-%Plane_f = planeModel([sf_f.p10,sf_f.p01,-1,sf_f.p00]);
-Plane_f.Normal = [sf_f.p10,sf_f.p01,-1];
+
+sf_f.p00 = points_f(1,1); % midplane position in X 
+sf_f.p10 = -1;
+sf_f.p01 = 0;
+sf_f.p11 = 0;
+
 
 %% Get rotation between the planes
+
 normal_m = Plane_m.Normal;
 normal_m = normal_m/norm(normal_m);
-normal_f = Plane_f.Normal;
-normal_f = normal_f/norm(normal_f);
+
+normal_f = [sf_f.p10 sf_f.p01 sf_f.p11]; % -1 0 0
 
 radians = acos(dot(normal_m,normal_f));
 %%
@@ -59,7 +54,6 @@ axis = cross(normal_m,normal_f);
 axis = axis/norm(axis);
 R = matrix_rotate(axis, radians);
 
-normal_t = R*normal_m';
 %% Determine plane intersection
 A = [sf_m.p10 sf_m.p01;sf_f.p10 sf_f.p01];
 D = [sf_m.p00;sf_f.p00];
