@@ -41,11 +41,11 @@ end
     function data = getUnique(table,indeces,after)
         if after == 0
             data = [table.x1(indeces),table.y1(indeces),table.z1(indeces),table.core1(indeces)];
-            data = unique(data,'rows');
+            data = unique(data,'rows','stable');
         end
         if after == 1
             data = [table.x2(indeces),table.y2(indeces),table.z2(indeces),table.core2(indeces)];
-            data = unique(data,'rows');
+            data = unique(data,'rows','stable');
         end
     end
 
