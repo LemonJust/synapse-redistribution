@@ -1,4 +1,4 @@
-function db = getDB_LOO(fishID,stu,syn,nBootstrapSamples)
+function db = getDB_LOO(fishID,stu,syn)
 % Get Decision boundary Leave one out: 
 % returns decision boundaries fron LOO subsets (db.data)
 % and ten DB defined on bootstrap samples (db.bs) from LOO subset
