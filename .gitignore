@@ -8,3 +8,5 @@ get_data/cohort_data.mat
 data_analysis/plane_statistics/*.xlsx
 
 data_analysis/db_plane/db_planes.mat
+
+data_analysis/db_plane/tex_out/
