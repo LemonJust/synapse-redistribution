@@ -1,13 +1,21 @@
-## Analysis and figure code from Dempsey et al. 2020
-+ Data registration 
-++ Landmark registration 
-++ Rotate to dorsal view 
-+ SVM analysis of synaptic PC
-++ calculate the DB-plane 
-++ calculate regional statistics 
-+ Dendra2 experiment 
-++ calculate regional statistics
+# Analysis and figure code from Dempsey et al. 2020
 
-## Requirements
+Redistribution of synapses accompanies memory formation in larval zebrafish
+William P. Dempsey, Zhuowei Du, Anna Nadtochiy, Karl Czajkowski, Colton D. Smith,
+Andrey Andreev, Drew N. Robson, Jennifer M.B. Li, Serina Applebaum, Thai Truong, Carl
+Kesselman, Scott E. Fraser and Don B. Arnold*
 
-## Getting the Data
+
+## Data registration 
+
+**registration** folder contains the code for the fish alignment to template based on the 3 landmarks. It takes 3 points in the fish space and in the template space as input and outputs a transformation matrix (rigid + uniform scaling). All the fish have their corresponding transformation in the data repository, so the synaptic point clouds that you can get from the data repository will already be registered into the template space. 
+
+
+## Import data
+**get_data** folder contains the code for importing the data from the .csv that you will get out of the data repository into a convenient structure. Please follow the steps in **ImportCohortData.mlx**
+## Data Analysis 
+**data_analysis** folder contains the code to calculate the DB-plane and get the statistics (number of synapses, fractional gain/loss , median intensity, etc ) on either side of the plane and in the whole pallium. After you have imported the data, please follow the steps in  **db_plane/CalculateDBPlane.mlx** to calculate the DB-planes and then **plane_statistics/GETPlaneStatistics.mlx** to export statistics into excel files. 
+
+## Data visualization
+
+**data_analysis** folder contains the code to visualize synaptic distribution in 3D ( as a point-cloud and voxels) and plot DB-planes. 
