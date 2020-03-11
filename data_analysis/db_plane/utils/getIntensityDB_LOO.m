@@ -19,10 +19,12 @@ function db = getIntensityDB_LOO(fishID,stu,syn)
 nFish = length(fishID);
 for iFish = 1:nFish
     
-    disp(['Fish ',num2str(iFish),' out of ',num2str(nFish)]);
-    
+    disp(['DB for fish #',num2str(iFish),' out of ',num2str(nFish)]);
+    disp(['Fish ID ',num2str(fishID(iFish))]);
+    disp('Using fish : ');
     smartID = get_subset(fishID,iFish);
-    cl = getDBfromInt(smartID,stu,syn,0,0);
+    smartID
+    cl = getDBfromInt(smartID,stu,syn);
     db.cl{iFish} = cl;
     db.Bias{iFish} = cl.Bias;
     db.Beta{iFish} = cl.Beta;
@@ -42,6 +44,9 @@ pointCloud_ua = getPointCloud_midplaneFixed(smartID, stu, synID, syn);
 end
 
 function [pointCloud_ub, pointCloud_ua] = getIntensityClouds(smartID,stu,syn)
+% returns normalised intenseties
+
+
 if isstring(smartID)
     [howSmart,~] = chooseHowSmart(smartID, stu);
 else
@@ -50,28 +55,27 @@ end
 pointCloud_ub = [];
 pointCloud_ua = [];
 for iFish = howSmart
-    synID = "ub";
-    [whichCase,~,~] = chooseCase(synID,syn);
-    int_ub = cat(1,whichCase.intensity_mp{iFish});
-    norm_before = median(int_ub);
-    int_ub = int_ub/norm_before;
-    pointCloud_ub = [pointCloud_ub;int_ub];
+
+    int_ub = syn.unchangedBefore.intensity_mp{iFish};
+    int_ua = syn.unchangedAfter.intensity_mp{iFish};
     
-    synID = "ua";
-    [whichCase,~,~] = chooseCase(synID,syn);
-    int_ua = cat(1,whichCase.intensity_mp{iFish})/norm_before;
+    norm_before = median(int_ub);
+    
+    int_ub = int_ub/norm_before;
+    int_ua = int_ua/norm_before;
+    
+    pointCloud_ub = [pointCloud_ub;int_ub];
     pointCloud_ua = [pointCloud_ua;int_ua];
 end
 end
 
-function cl_w = getDBfromInt(smartIDs,stu,syn,thr_neg,thr_pos)
+function cl_w = getDBfromInt(smartIDs,stu,syn)
 % bleaching correction
 mult = (100 + 3.86)/100;
 
 % per fish to do the median intensity correction 
 pointCloud_ub =[];
 int_diff = [];
-ratio = [];
 for smartID = smartIDs
     % get intensity
     [intensity_ub, intensity_ua] = getIntensityClouds(smartID,stu,syn);
@@ -79,28 +83,28 @@ for smartID = smartIDs
     % get position
     [i_pointCloud_ub, ~] = getPointClouds(smartID,stu,syn);
     
-    % set median int to zero
-    i_int_diff = intensity_ub - intensity_ua*mult;
+    % set median difference of intensity to zero (per fish!?!?)
+    i_int_diff = intensity_ua*mult - intensity_ub;
     i_int_diff = i_int_diff - median(i_int_diff);
-    
-    % find the ratio
-    i_ratio = -i_int_diff./intensity_ub;
     
     % add to the previous data
     pointCloud_ub = [pointCloud_ub;i_pointCloud_ub];
     int_diff = [int_diff;i_int_diff];
-    ratio = [ratio;i_ratio];
 end
+
+disp('int_diff : ');
+int_diff
+
+
 % split into "intensity lost" & "intensity gain"
+pos = int_diff>0; % intensity gain
+neg = int_diff<0; % intensity loss
 
-pos = ratio<thr_neg; %int_diff<0;
-neg = ratio>thr_pos; %%int_diff>0;
+int_gain = int_diff(pos);
+int_lost = -int_diff(neg);
 
-int_gain = -int_diff(neg);
-int_lost = int_diff(pos);
-
-lost = pointCloud_ub(pos,:);
-gained = pointCloud_ub(neg,:);
+lost = pointCloud_ub(neg,:);
+gained = pointCloud_ub(pos,:);
 
 % find the weighted decision boundary
 nSamples = min(length(lost),length(gained)); % N to downsample
