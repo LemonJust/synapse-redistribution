@@ -18,4 +18,4 @@ Kesselman, Scott E. Fraser and Don B. Arnold*
 
 ## Data visualization
 
-**data_vizualization** folder contains the code to visualize synaptic distribution in 3D ( as a point-cloud and voxels) and plot DB-planes. 
+**data_vizualization** folder contains the code to visualize synaptic distribution in 3D ( as a point-cloud and voxels) and plot DB-planes. After you have imported the data and calculated the DB-plane, please follow the steps in  **DataVisualization.mlx** to get familiar with all the plotting methods.
