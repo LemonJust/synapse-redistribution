@@ -19,11 +19,11 @@ function db = getIntensityDB_LOO(fishID,stu,syn)
 nFish = length(fishID);
 for iFish = 1:nFish
     
-    disp(['DB for fish #',num2str(iFish),' out of ',num2str(nFish)]);
-    disp(['Fish ID ',num2str(fishID(iFish))]);
-    disp('Using fish : ');
+    disp(['Fish ',num2str(iFish),' out of ',num2str(nFish)]);
+    %disp(['Fish ID ',num2str(fishID(iFish))]);
+    %disp('Using fish : ');
     smartID = get_subset(fishID,iFish);
-    smartID
+    %smartID
     cl = getDBfromInt(smartID,stu,syn);
     db.cl{iFish} = cl;
     db.Bias{iFish} = cl.Bias;
@@ -91,10 +91,6 @@ for smartID = smartIDs
     pointCloud_ub = [pointCloud_ub;i_pointCloud_ub];
     int_diff = [int_diff;i_int_diff];
 end
-
-disp('int_diff : ');
-int_diff
-
 
 % split into "intensity lost" & "intensity gain"
 pos = int_diff>0; % intensity gain
