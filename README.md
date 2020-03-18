@@ -5,6 +5,13 @@ William P. Dempsey, Zhuowei Du, Anna Nadtochiy, Karl Czajkowski, Colton D. Smith
 Andrey Andreev, Drew N. Robson, Jennifer M.B. Li, Serina Applebaum, Thai Truong, Carl
 Kesselman, Scott E. Fraser and Don B. Arnold*
 
+<p align="center">
+  <img src="images/paper_cartoon.png" width = "500" align="middle">
+</p>
+<p align="right">
+  cartoon by Roman Papayanov
+</p>
+
 # Main analysis pipeline
 This code performs analysis of the synaptic 3D distribution. It assumes that the pre-processing steps , such as registration, have been done and the parameters, such as deforestation radius and bleaching coefficient, have been chosen (see extra analysis & pre-processing).
 ## Import data
