@@ -1,7 +1,7 @@
 function [stu,syn] = getCohortData(in)
 %% get input
 cohort_path = in.cohort_path;
-key_path = in.key_path;
+cohort_key = in.key_path;
 image_file = in.image_file;
 image_res = in.image_res;
 xyzMicronStep = in.voxel_side;
@@ -12,13 +12,13 @@ yzplane_res = in.yzplane_res;
 %% read cohort
 table = readtable(cohort_path);
 %% sort studies into Learners/Nonlearners/CStim/NStim/UStim
-studyName = strtrim(unique(table.subject));
-nStudies = length(studyName);
+unique_id = strtrim(unique(table.study_id));
+nStudies = length(unique_id);
 
-stu = getHowSmartIdV2(key_path,studyName);
+stu = getHowSmartIdV2(cohort_key,unique_id);
 
 %% get indices of lost/gained/unchanged synapses for each study 
-[unchangedId,lostId,gainedId] = getStudiesV2(table,studyName);
+[unchangedId,lostId,gainedId] = getStudiesV2(table,unique_id);
 
 %% get xyz coordinates for all the synapses in the Standart Fish Space
 [lost,gained,unchangedBefore,unchangedAfter,allBefore,allAfter] = getxyz(table,...

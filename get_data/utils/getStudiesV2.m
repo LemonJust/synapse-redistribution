@@ -1,26 +1,25 @@
-function [unchanged,lost,gained] = getStudiesV2(table,studyName)
-%% separate synapse type
-% returns all id of synapses gained, lost, etc for each separate study 
-
+function [unchanged,lost,gained] = getStudiesV2(table,unique_id)
+% returns all id of synapses gained, lost, etc for each separate study
 % 0   - Paired before/after (unchanged)
 % 1    - Unpaired before (lost)
 % 2   - Unpaired after (gained)
 
-unchanged = cell(length(studyName),1);
-lost = cell(length(studyName),1);
-gained = cell(length(studyName),1);
-studyID = strtrim(table.subject);
+study_id = strtrim(table.study_id);
 
-allUnchanged = (table.t==0);
-allLost = (table.t==1);
-allGained = (table.t==2);
+is_unchanged = (table.t==0);
+is_lost = (table.t==1);
+is_gained = (table.t==2);
 
-nStudies = length(studyName);
-for iStudy = 1:nStudies
-    fishID = studyName{iStudy};
-    unchanged{iStudy} = find(ismember(studyID,fishID).*allUnchanged);
-    lost{iStudy} = find(ismember(studyID,fishID).*allLost);
-    gained{iStudy} = find(ismember(studyID,fishID).*allGained);
+unchanged = cell(length(unique_id),1);
+lost = cell(length(unique_id),1);
+gained = cell(length(unique_id),1);
+
+for iStudy = 1:length(unique_id)
+    fish_id = unique_id{iStudy};
+    
+    unchanged{iStudy} = find(ismember(study_id,fish_id).*is_unchanged);
+    lost{iStudy} = find(ismember(study_id,fish_id).*is_lost);
+    gained{iStudy} = find(ismember(study_id,fish_id).*is_gained);
 end
 
 end
