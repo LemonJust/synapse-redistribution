@@ -7,7 +7,6 @@ unique_id = strtrim(unique_id);
 key = readtable(cohort_key);
 %%
 study_type = strtrim(key.study_type);
-legacy_id = strtrim(key.id);
 study_id = strtrim(key.study_id);
 %%
 Learners_name = study_id(ismember(study_type, 'Learner'));
@@ -15,37 +14,27 @@ Nonlearners_name = study_id(ismember(study_type, 'Nonlearner'));
 NS_name = study_id(ismember(study_type, 'No Stim Control'));
 US_name = study_id(ismember(study_type, 'US Only Control'));
 CS_name = study_id(ismember(study_type, 'CS Only Control'));
-%%
-Learners_ID = legacy_id(ismember(study_type, 'Learner'));
-Nonlearners_ID = legacy_id(ismember(study_type, 'Nonlearner'));
-NS_ID = legacy_id(ismember(study_type, 'No Stim Control'));
-US_ID = legacy_id(ismember(study_type, 'US Only Control'));
-CS_ID = legacy_id(ismember(study_type, 'CS Only Control'));
+
 %%
 [stu.Learners,is_in_key] = get_group(study_id,study_type,...
     'Learner',unique_id);
-stu.Id.Learners = Learners_ID(is_in_key);
-stu.Name.Learners = Learners_name(is_in_key);
+stu.Id.Learners = Learners_name(is_in_key);
 
 [stu.Nonlearners,is_in_key] = get_group(study_id,study_type,...
     'Nonlearner',unique_id);
-stu.Id.Nonlearners = Nonlearners_ID(is_in_key);
-stu.Name.Nonlearners = Nonlearners_name(is_in_key);
+stu.Id.Nonlearners = Nonlearners_name(is_in_key);
 
 [stu.NStim,is_in_key] = get_group(study_id,study_type,...
     'No Stim Control',unique_id);
-stu.Id.NStim = NS_ID(is_in_key);
-stu.Name.NStim = NS_name(is_in_key);
+stu.Id.NStim = NS_name(is_in_key);
 
 [stu.UStim,is_in_key] = get_group(study_id,study_type,...
     'US Only Control',unique_id);
-stu.Id.UStim = US_ID(is_in_key);
-stu.Name.UStim = US_name(is_in_key);
+stu.Id.UStim = US_name(is_in_key);
 
 [stu.CStim,is_in_key] = get_group(study_id,study_type,...
     'CS Only Control',unique_id);
-stu.Id.CStim = CS_ID(is_in_key);
-stu.Name.CStim = CS_name(is_in_key);
+stu.Id.CStim = CS_name(is_in_key);
 end
 %% HELPER FUNCTIONS:
 function [group_members,is_in_key] = get_group(study_id,study_type,...
