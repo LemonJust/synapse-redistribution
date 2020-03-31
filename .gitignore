@@ -1,3 +1,5 @@
 *.asv
 get_data/data/ImgZfDsy20180223D3_bin221.tif
 num_labeled/data/
+
+data_analysis/plane_statistics/out/
