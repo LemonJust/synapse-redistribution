@@ -5,3 +5,5 @@ num_labeled/data/
 data_analysis/plane_statistics/out/
 
 data_vizualization/data/
+
+get_data/data/legacy/
