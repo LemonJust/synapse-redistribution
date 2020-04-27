@@ -119,7 +119,7 @@ end
 xlFile = 'D:\TR01\1DCPCohort\transforms_1DCPCohort_V2.xls';
 for iFish = 1:length(fishReady)
 fishID = {TRF(iFish).ID};
-myString = {transformToText(TRF(iFish).transforms(5).matrix)};
+myString = {transform2text(TRF(iFish).transforms(5).matrix)};
 
 xlRange = ['A',num2str(iFish),':A',num2str(iFish)];
 xlswrite(xlFile,fishID,xlRange)
@@ -130,7 +130,7 @@ end
 xlFile = 'D:\TR01\1DCPCohort\transforms_1DCPCohort_NoMidplane.xls';
 for iFish = 1:3
 fishID = {TRF(iFish).ID};
-myString = {transformToText(TRF(iFish).transforms(5).matrix)};
+myString = {transform2text(TRF(iFish).transforms(5).matrix)};
 
 xlRange = ['A',num2str(iFish),':A',num2str(iFish)];
 xlswrite(xlFile,fishID,xlRange)
@@ -146,14 +146,6 @@ end
 
 
 %% HELPER FUNCTIONS
-
-function myString = transformToText(Minv)
-    myString = (['[[',num2str(Minv(1,1)),',',num2str(Minv(1,2)),',',num2str(Minv(1,3)),',',num2str(Minv(1,4)),'],'...
-         '[',num2str(Minv(2,1)),',',num2str(Minv(2,2)),',',num2str(Minv(2,3)),',',num2str(Minv(2,4)),'],'...
-         '[',num2str(Minv(3,1)),',',num2str(Minv(3,2)),',',num2str(Minv(3,3)),',',num2str(Minv(3,4)),'],'...
-        '[',num2str(Minv(4,1)),',',num2str(Minv(4,2)),',',num2str(Minv(4,3)),',',num2str(Minv(4,4)),']]']);
-end
-
 function TRF = createAndAddTrf(fishID,r2gTrfm,ThreePoints,MidplaneAlignment)
 TRF = struct('ID',{fishID},'transforms',...
     {struct('info',{'red to green'},'matrix',{r2gTrfm})});
