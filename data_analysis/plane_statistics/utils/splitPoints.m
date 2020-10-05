@@ -1,4 +1,7 @@
 function [latSideIdx, medSideIdx] = splitPoints(pointCloud,SvmModel,flip)
+% Returns indexes of points on lateral and medial sides of the db plane.
+% db plane can be either of class ClassificationSVM or coefficients for
+% plane equation.
 
 if class(SvmModel) ==  "ClassificationSVM"
     [label,~] = predict(SvmModel,pointCloud);
