@@ -28,6 +28,7 @@ stu = getHowSmartIdV2(cohort_key,unique_id);
 %% get xyz coordinates for all the synapses in the Dorsal space
 % apply midplane transform :
 % dorsalize by setting midplane of the fish to be Oyz
+dorsalize
 if dorsalize
     
     template_midplane = in.template_midplane;
