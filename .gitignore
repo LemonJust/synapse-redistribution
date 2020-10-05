@@ -11,3 +11,18 @@ get_data/data/legacy/
 registration/data/gad1b/
 
 registration/data/gab1b/gad1b_images/
+registration/data/gab1b/ITK_SNAP_Matrices/
+
+get_data/data/single_entry/gab1/Synspy-pair-csv_Files/
+
+registration/data/gab1b/Tpt1_Registrations/
+
+registration/data/gab1b/Tpt2-to-Tpt1_Matrices/
+
+psd95_verify/
+
+data_export/
+
+data_analysis/roi_statistics/out/
+
+not_used_stuff/
