@@ -5,9 +5,13 @@ function stat = getVoxels(MicronStep,xyz,data)
 % data : what to sum up
 
 % voxelRange (x,y,z) - image to overlay over in microns 
-imageFile = 'D:\TR01\Synapses\ImgZfDsy20180223D3_bin221.tif';
+
+% these parameters are HARDCODED for out template image:
 resolution = [0.52 0.52 0.4];
-Img = getTiffInfo(imageFile);
+Img.nFrame = 510;
+Img.width = 1024;
+Img.height = 1024;
+
 % Voxelize to image
 xyzMicronRange = [Img.width Img.height Img.nFrame].*resolution;
 voxelRange = floor(xyzMicronRange/MicronStep)+1;

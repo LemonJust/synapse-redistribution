@@ -10,7 +10,7 @@ p = inputParser;
 classes = {'numeric'};
 attributes = {'ncols', 3};
 addRequired(p,'data',@(x) validateattributes(x,classes,attributes));
-addRequired(p,'cl',@(x) isa(x,'ClassificationSVM'));
+addRequired(p,'cl',@(x) or(and(isfield(x,'Bias'),isfield(x,'Beta')),isa(x,'ClassificationSVM'))); %
 addParameter(p,'Color',defaultColor,@(x) validateattributes(x,classes,attributes));
 validScalarPosNum = @(x) isnumeric(x) && isscalar(x) && (x > 0);
 addParameter(p,'FaceAlpha',defaultAlpha,validScalarPosNum);
