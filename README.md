@@ -15,7 +15,7 @@ Kesselman, Scott E. Fraser and Don B. Arnold*
 # Main analysis pipeline
 This code performs analysis of the synaptic 3D distribution. It assumes that the pre-processing steps , such as registration, have been done and the parameters, such as deforestation radius and bleaching coefficient, have been chosen (see extra analysis & pre-processing).
 
-Implemented in MATLAB R2018b version.
+Implemented in MATLAB R2018b.
 ## Import data
 **get_data** folder contains the code for importing the data from the .csv that you will get out of the data repository into a convenient structure. Please follow the steps in **ImportCohortData.mlx**
 ## Data Analysis
@@ -23,12 +23,14 @@ Implemented in MATLAB R2018b version.
 
 ## Data visualization
 
-**data_vizualization** folder contains the code to visualize synaptic distribution in 3D ( as a point-cloud and voxels) and plot DB-planes. After you have imported the data and calculated the DB-plane, please follow the steps in **DataVisualization.mlx** to get familiar with all the plotting methods.
+**data_vizualization** folder contains the code to visualize synaptic distribution in 3D ( as a point-cloud and voxels), plot DB-planes and manually segmented ROIs on top of the template fish. After you have imported the data and calculated the DB-plane, please follow the steps in **DataVisualization.mlx** to get familiar with all the plotting methods.
+
+This folder also contains a Fiji macro **CsvToPointsAsChannel.ijm** that creates a second channel from the coordinates of the segemnted synapses, to show them on top of raw images in Fiji. To run it you need to create a csv with the synapse coordinates in pixels, use **sbr/SBR_Estimation_and_Simulation_of_LossGain.ipynb** to create one.
 
 # Extra analysis & pre-processing steps
 This code registers synaptic point clouds from different fish to the template fish and estimates some coefficients for the subsequent analysis (see main analysis pipeline).
 
-Implemented in MATLAB R2018b version.
+Implemented in MATLAB R2018b and python 3.6.
 ## Data registration
 
 **registration** folder contains the code for the fish alignment to template based on the 3 landmarks. It takes 3 points in the fish space and in the template space as input and outputs a transformation matrix (rigid + uniform scaling). All the fish have their corresponding transformation in the data repository, so the synaptic point clouds that you can get from the data repository will already be registered into the template space.
@@ -41,3 +43,9 @@ To estimate the number of labeled synapses, we compare the brain volume of  7 dp
 
 ## Estimate bleaching
 The intensity of the synapses that are present in both tp1 and tp2 images is redused due to bleaching. **bleaching\EstimateBleaching.mlx** estimates the amount of bleaching in unchanged synapses that happens due to one imaging session.
+
+## Estimate Local Background and Simulate Intensity Loss/Gain
+**sbr\SBR_Estimation_and_Simulation_of_LossGain.ipynb** calculates the local background for each synapse, signal to background ratio (sbr) and simulate Intensity Loss/Gain that would have happened due to intensity reduction only. It will also produce a csv with the synapse coordinates in pixels, that you can use with **data_vizualization\CsvToPointsAsChannel.ijm** to have a look at the synapses in the raw images. 
+
+## Spine intensity normalization
+**spine_labeling\normalise_robust_scaler.py** This code normalizes the intensity data for fig3 using the Robust Scaler.
