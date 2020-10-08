@@ -44,7 +44,7 @@ To estimate the number of labeled synapses, we compare the brain volume of  7 dp
 ## Estimate bleaching
 The intensity of the synapses that are present in both tp1 and tp2 images is redused due to bleaching. **bleaching\EstimateBleaching.mlx** estimates the amount of bleaching in unchanged synapses that happens due to one imaging session.
 
-## Estimate Local Background and Simulate Intensity Loss/Gain
+## Estimate local background and simulate intensity loss/gain
 **sbr\SBR_Estimation_and_Simulation_of_LossGain.ipynb** calculates the local background for each synapse, signal to background ratio (sbr) and simulate Intensity Loss/Gain that would have happened due to intensity reduction only. It will also produce a csv with the synapse coordinates in pixels, that you can use with **data_vizualization\CsvToPointsAsChannel.ijm** to have a look at the synapses in the raw images. 
 
 ## Spine intensity normalization
